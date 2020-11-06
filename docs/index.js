@@ -2,31 +2,31 @@ function getAmmoRow(ammo) {
     const eff = ammo.Efficency;
 
     var accuracyInfo = ""
-    if(ammo.Accuracy !== 0) {
+    if (ammo.Accuracy !== 0) {
         var color = "red";
-        if(ammo.Accuracy > 0) {
+        if (ammo.Accuracy > 0) {
             color = "green";
             ammo.Accuracy = "+" + ammo.Accuracy;
         }
-        accuracyInfo = `<bullseye-center> </bullseye-center> <span style="color:${color}">${ammo.Accuracy}</span>`;
+        accuracyInfo = `<div class="p-2"><bullseye-center> </bullseye-center> <span  class="font-weight-normal" style="color:${color}">${ammo.Accuracy}</span></div>`;
     }
     var recoilInfo = ""
-    if(ammo.Recoil !== 0) {
+    if (ammo.Recoil !== 0) {
         color = "green";
-        if(ammo.Recoil > 0) {
+        if (ammo.Recoil > 0) {
             color = "red";
             ammo.Recoil = "+" + ammo.Recoil;
         }
-        recoilInfo = `<arrow-up-right> </arrow-up-right> <span style="color:${color}">${ammo.Recoil}</span>`;
+        recoilInfo = `<div class="p-2"><arrow-up-right> </arrow-up-right> <span  class="font-weight-normal" style="color:${color}">${ammo.Recoil}</span></div>`;
     }
 
-    
+
     const template = document.createElement('template');
     template.innerHTML = `<div class="row">
     <div class="container-fluid">
         <div class="row">
             <div class="col col-4">
-                <h5 class="font-weight-light">${ammo.Name}</h2>
+                <h5 class="font-weight-bold">${ammo.Name}</h2>
             </div>
             <div class="col col-8">
                 <div class="container">
@@ -41,20 +41,50 @@ function getAmmoRow(ammo) {
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col">
-                            
-                                <droplet-half-icon></droplet-half-icon> ${ammo.Flesh}
-                                <arrow-bar-right> </arrow-bar-right> ${ammo.Penetration}
-                                <shield-shaded> </shield-shaded> ${ammo.Armor}
-                                ${accuracyInfo}
-                                ${recoilInfo}
-                                <diamond-fill> </diamond-fill> ${ammo.Fragmentation}%
+                        <div class="col d-flex flex-wrap">
+                        <div class="p-2"><droplet-half-icon></droplet-half-icon> <span class="font-weight-normal">${ammo.Flesh}</span></div>
+                        <div class="p-2"><arrow-bar-right> </arrow-bar-right> <span class="font-weight-normal"> ${ammo.Penetration}</span></div>
+                        <div class="p-2"><shield-shaded> </shield-shaded> <span class="font-weight-normal">${ammo.Armor}</span></div>
+                        ${accuracyInfo}
+                        ${recoilInfo}
+                        <div class="p-2"><diamond-fill> </diamond-fill> <span class="font-weight-normal">${ammo.Fragmentation}</span></div>
                         </div>
                     </div>
                 </div> 
             </div>
         </div>
         <hr />
+    </div>`;
+    const node = template.content.firstElementChild;
+    return node;
+}
+
+function getLegend() {
+    const template = document.createElement('template');
+    template.innerHTML = `<div class='row'>
+        <div class='col'>
+            <h3>Legend</h3>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <droplet-half-icon></droplet-half-icon> <span class="font-weight-bold"> Flesh Damage</span>
+                </li>
+                <li class="list-group-item">
+                    <arrow-bar-right></arrow-bar-right> <span class="font-weight-bold"> Penetration Power</span>
+                </li>
+                <li class="list-group-item">
+                    <shield-shaded></shield-shaded> <span class="font-weight-bold"> Armor Damage (%)</span>
+                </li>
+                <li class="list-group-item">
+                    <bullseye-center></bullseye-center> <span class="font-weight-bold"> Accuracy (%)</span>
+                </li>
+                <li class="list-group-item">
+                    <arrow-up-right></arrow-up-right> <span class="font-weight-bold"> Recoil (%)</span>
+                </li>
+                <li class="list-group-item">
+                    <diamond-fill></diamond-fill> <span class="font-weight-bold"> Fragmentation Chance (%)</span>
+                </li>
+            </ul>
+        </div>
     </div>`;
     const node = template.content.firstElementChild;
     return node;

@@ -12,7 +12,7 @@
 
     <!-- Custom CSS-->
     <link rel="stylesheet" href="style.css">
-    
+
     <title>Tarkov Ballistic</title>
 </head>
 
@@ -20,7 +20,7 @@
     <div class='container-fluid'>
         <div class='row'>
             <div class='col'>
-                <h1>Tarkov Ballistic</h1>
+                <h1>Tarkov Ballistics</h1>
                 <p class="text-monospace">Version: v0.1 (Crawled)</p>
             </div>
         </div>
@@ -28,13 +28,13 @@
         <div class='row'>
             <div class='col'>
                 <select class="custom-select" id="calibre-combobox">
-                    <option selected>Calibre</option>
+                    <option value="legend" selected>Calibre</option>
                 </select>
             </div>
         </div>
         <hr />
-        <div id="ammo-list"></div>
-        
+        <div id="ammo-list">
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -43,49 +43,51 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
         crossorigin="anonymous"></script>
-    
+
     <script src="index.js"></script>
     <script src="icons.js"></script>
-    
+
     <script>
         var calibres;
 
         var mydiv = document.getElementById("ammo-list");
         var cbox = document.getElementById("calibre-combobox");
 
+        mydiv.appendChild(getLegend());
+
         fetch("data.json")
-        .then(res => res.json())
-        .then((out) => {
-            calibres = out;
+            .then(res => res.json())
+            .then((out) => {
+                calibres = out;
 
-            
-            out.forEach(c => {
-                const option = document.createElement('option');
-                option.value = c.Name;
-                option.text = c.Name; 
-                
-                cbox.appendChild(option);
-                console.log(c.Name)
-            });
-        })
-        .catch(err => { throw err });
 
-        $("#calibre-combobox").change(function(){
+                out.forEach(c => {
+                    const option = document.createElement('option');
+                    option.value = c.Name;
+                    option.text = c.Name;
+
+                    cbox.appendChild(option);
+                    console.log(c.Name)
+                });
+            })
+            .catch(err => { throw err });
+
+        $("#calibre-combobox").change(function () {
             var selectedCalibre = $(this).children("option:selected").val();
             mydiv.innerHTML = "";
-            calibres.forEach( c => {
-                if(c.Name == selectedCalibre) {
-                    c.Ammos.forEach( a => {
+            calibres.forEach(c => {
+                if (c.Name == selectedCalibre) {
+                    c.Ammos.forEach(a => {
                         mydiv.appendChild(getAmmoRow(a));
-                                  
                     });
                 }
             });
+            if(selectedCalibre === "legend") {
+                mydiv.appendChild(getLegend());         
+            }
         });
 
-        function calibreselect(){
-            console.log("CAHNGED");
-        }
+
     </script>
 
 </body>

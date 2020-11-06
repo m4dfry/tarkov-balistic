@@ -6,5 +6,5 @@ Project served https://blog.m4dfry.space/tarkov-ballistics/
 
 ## TODO
  - [ ] Stationary Weapon name cut (crawler)
- - [ ] Icons legend (UI)
+ - [X] Icons legend (UI)
  - [ ] Add license footer
