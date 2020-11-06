@@ -106,6 +106,9 @@ func readTable(table string) [][]string {
 					spanBuffer[posCount] = i - 1
 				}
 			}
+			if posCount == 1 {
+				cellValue = simplifyAmmoName(cellValue)
+			}
 			retLine = append(retLine, cellValue)
 			posCount++
 		}
@@ -129,7 +132,7 @@ func extractSpanValue(s string) int {
 	return 1
 }
 
-var reSquare = regexp.MustCompile(`\[?\[?(.*)\]\]`)
+var reSquare = regexp.MustCompile(`\[\[(.*)\]\]`)
 var reHTMLTaggo = regexp.MustCompile(`<[^>]*>`)
 
 func cleanCell(s string) string {
@@ -138,6 +141,7 @@ func cleanCell(s string) string {
 	if len(res) == 2 {
 		ret = res[1]
 	}
+	ret = strings.Replace(ret, "]]**", "", 1)
 	return reHTMLTaggo.ReplaceAllLiteralString(ret, "")
 }
 
@@ -157,6 +161,20 @@ func extractTables(page string) []string {
 		}
 	}
 	return ret
+}
+
+var uselessName = [...]string{
+	"12/70", "12x70 shell with", "12x70", "20/70", "20x70", "23x75mm", "9x18 PM mm", "9x18 mm PM",
+	"7.62x25mm", "TT 9x19 mm", ".45 ACP", "9x21 mm", "5.7x28 mm", "4.6x30mm", "9x39 mm", ".366",
+	"5.45x39 mm", "5.56x45 mm", "7.62x39 mm", "7.62x51 mm", "7.62x54R", "12.7x55 mm", "40x46 mm"}
+
+func simplifyAmmoName(value string) string {
+	for _, un := range uselessName {
+		if strings.Contains(value, un) {
+			value = strings.ReplaceAll(value, un, "")
+		}
+	}
+	return strings.TrimSpace(value)
 }
 
 func main() {
@@ -188,7 +206,7 @@ func main() {
 		log.Fatalf("serialize error: %s", err)
 	}
 
-	err = ioutil.WriteFile("site/data.json", jsonData, 0644)
+	err = ioutil.WriteFile("docs/data.json", jsonData, 0644)
 	if err != nil {
 		log.Fatalf("write file error: %s", err)
 	}

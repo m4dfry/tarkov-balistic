@@ -29,7 +29,6 @@
             <div class='col'>
                 <select class="custom-select" id="calibre-combobox">
                     <option selected>Calibre</option>
-                    
                 </select>
             </div>
         </div>
@@ -49,22 +48,44 @@
     <script src="icons.js"></script>
     
     <script>
+        var calibres;
+
         var mydiv = document.getElementById("ammo-list");
-        mydiv.appendChild(getAmmoRow(undefined));
+        var cbox = document.getElementById("calibre-combobox");
 
         fetch("data.json")
         .then(res => res.json())
         .then((out) => {
-            var cbox = document.getElementById("calibre-combobox");
+            calibres = out;
+
+            
             out.forEach(c => {
                 const option = document.createElement('option');
                 option.value = c.Name;
                 option.text = c.Name; 
                 
                 cbox.appendChild(option);
+                console.log(c.Name)
             });
         })
         .catch(err => { throw err });
+
+        $("#calibre-combobox").change(function(){
+            var selectedCalibre = $(this).children("option:selected").val();
+            mydiv.innerHTML = "";
+            calibres.forEach( c => {
+                if(c.Name == selectedCalibre) {
+                    c.Ammos.forEach( a => {
+                        mydiv.appendChild(getAmmoRow(a));
+                                  
+                    });
+                }
+            });
+        });
+
+        function calibreselect(){
+            console.log("CAHNGED");
+        }
     </script>
 
 </body>
