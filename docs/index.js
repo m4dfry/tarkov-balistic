@@ -63,7 +63,29 @@ function getLegend() {
     const template = document.createElement('template');
     template.innerHTML = `<div class='row'>
         <div class='col'>
+        <br />
+
+        <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">Alert warning!</h4>
+        <p>This page is a partial export of <a href="https://escapefromtarkov.gamepedia.com/Ballistics">this wiki page</a>. </p>
+        <p>For complete and up-to-date information, always refer to the original wiki.</p>
+        </div>
+
+        <br />
             <h3>Legend</h3>
+            <h5>Armor Effectiveness against Class:</h5>
+            <div class="row">
+                <div class="col">
+                    <span class="badge badge-primary">1</span>
+                    <span class="badge badge-primary">2</span>
+                    <span class="badge badge-primary">3</span>
+                    <span class="badge badge-primary">4</span>
+                    <span class="badge badge-primary">5</span>
+                    <span class="badge badge-primary">6</span>
+                </div>
+            </div>
+            <br /><br />
+            <h5>Others info:</h5>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                     <droplet-half-icon></droplet-half-icon> <span class="font-weight-bold"> Flesh Damage</span>

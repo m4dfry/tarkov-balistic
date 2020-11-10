@@ -13,15 +13,14 @@
     <!-- Custom CSS-->
     <link rel="stylesheet" href="style.css">
 
-    <title>Tarkov Ballistic</title>
+    <title>Escape from Tarkov Ballistics</title>
 </head>
 
 <body>
     <div class='container-fluid'>
         <div class='row'>
             <div class='col'>
-                <h1>Tarkov Ballistics</h1>
-                <p class="text-monospace">Version: v0.1 (Crawled)</p>
+                <h1>Escape from Tarkov Ballistics</h1>
             </div>
         </div>
 
@@ -36,6 +35,24 @@
         <div id="ammo-list">
         </div>
     </div>
+
+    <!-- Footer -->
+<footer class="page-footer">
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">
+        This article uses material from the 
+        <a href="https://escapefromtarkov.gamepedia.com/Ballistics">"Ballistics"</a> 
+        article on the 
+        <a href="https://escapefromtarkov.gamepedia.com">Escape from Tarkov</a> 
+        wiki at
+        <a href="https://www.fandom.com/">Fandom</a>
+        and is licensed under the
+        <a href="https://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-Share Alike License</a>.
+    </div>
+    <!-- Copyright -->
+  
+  </footer>
+  <!-- Footer -->
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -67,7 +84,6 @@
                     option.text = c.Name;
 
                     cbox.appendChild(option);
-                    console.log(c.Name)
                 });
             })
             .catch(err => { throw err });
