@@ -21,13 +21,13 @@ type ammo struct {
 	Efficency     []int
 }
 
-type calibre struct {
+type caliber struct {
 	Name  string
 	Ammos []*ammo
 }
 
-func generateList(data [][]string) []*calibre {
-	var ret []*calibre
+func generateList(data [][]string) []*caliber {
+	var ret []*caliber
 
 	for _, line := range data {
 		log.Println(line)
@@ -58,7 +58,7 @@ func generateList(data [][]string) []*calibre {
 				}
 			}
 			if !added {
-				ret = append(ret, &calibre{line[0], []*ammo{newAmmo}})
+				ret = append(ret, &caliber{line[0], []*ammo{newAmmo}})
 			}
 		}
 

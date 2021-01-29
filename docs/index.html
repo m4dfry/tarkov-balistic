@@ -26,8 +26,8 @@
 
         <div class='row'>
             <div class='col'>
-                <select class="custom-select" id="calibre-combobox">
-                    <option value="legend" selected>Calibre</option>
+                <select class="custom-select" id="caliber-combobox">
+                    <option value="legend" selected>Caliber</option>
                 </select>
             </div>
         </div>
@@ -65,17 +65,17 @@
     <script src="icons.js"></script>
 
     <script>
-        var calibres;
+        var calibers;
 
         var mydiv = document.getElementById("ammo-list");
-        var cbox = document.getElementById("calibre-combobox");
+        var cbox = document.getElementById("caliber-combobox");
 
         mydiv.appendChild(getLegend());
 
         fetch("data.json")
             .then(res => res.json())
             .then((out) => {
-                calibres = out;
+                calibers = out;
 
 
                 out.forEach(c => {
@@ -88,17 +88,17 @@
             })
             .catch(err => { throw err });
 
-        $("#calibre-combobox").change(function () {
-            var selectedCalibre = $(this).children("option:selected").val();
+        $("#caliber-combobox").change(function () {
+            var selectedCaliber = $(this).children("option:selected").val();
             mydiv.innerHTML = "";
-            calibres.forEach(c => {
-                if (c.Name == selectedCalibre) {
+            calibers.forEach(c => {
+                if (c.Name == selectedCaliber) {
                     c.Ammos.forEach(a => {
                         mydiv.appendChild(getAmmoRow(a));
                     });
                 }
             });
-            if(selectedCalibre === "legend") {
+            if(selectedCaliber === "legend") {
                 mydiv.appendChild(getLegend());         
             }
         });
