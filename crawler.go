@@ -30,7 +30,7 @@ func generateList(data [][]string) []*calibre {
 	var ret []*calibre
 
 	for _, line := range data {
-		if len(line) > 13 {
+		if len(line) > 15 {
 			newAmmo := &ammo{line[1],
 				line[2],
 				safeIntReader(line[3]),
@@ -39,12 +39,12 @@ func generateList(data [][]string) []*calibre {
 				safeIntReader(line[6]),
 				safeIntReader(strings.Replace(line[7], "%", "", 1)),
 				[]int{
-					safeIntReader(line[8]),
-					safeIntReader(line[9]),
 					safeIntReader(line[10]),
 					safeIntReader(line[11]),
 					safeIntReader(line[12]),
 					safeIntReader(line[13]),
+					safeIntReader(line[14]),
+					safeIntReader(line[15]),
 				},
 			}
 
