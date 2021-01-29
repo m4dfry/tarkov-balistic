@@ -30,6 +30,8 @@ func generateList(data [][]string) []*calibre {
 	var ret []*calibre
 
 	for _, line := range data {
+		log.Println(line)
+
 		if len(line) > 15 {
 			newAmmo := &ammo{line[1],
 				line[2],
@@ -82,7 +84,17 @@ func readTable(table string) [][]string {
 	posCount := 0
 	spanBuffer := make(map[int]int)
 	lines := strings.Split(table, "\n")
+
+	linesBuffer := []string{}
 	for _, line := range lines {
+		if len(linesBuffer) > 1 && strings.HasPrefix(line, newLine) && strings.HasPrefix(linesBuffer[len(linesBuffer)-1], newLine) {
+			log.Println("Line removed")
+		} else {
+			linesBuffer = append(linesBuffer, line)
+		}
+	}
+
+	for _, line := range linesBuffer {
 		spanCount, span := spanBuffer[posCount]
 		for span && spanCount > 0 {
 			retLine = append(retLine, ret[len(ret)-1][posCount])
