@@ -190,7 +190,7 @@ func simplifyAmmoName(value string) string {
 }
 
 func main() {
-	url := "https://escapefromtarkov.gamepedia.com/Ballistics?action=raw"
+	url := "https://escapefromtarkov.fandom.com/wiki/Ballistics?action=raw"
 	log.Printf("GET %s ...\n", url)
 	resp, err := http.Get(url)
 
@@ -210,7 +210,7 @@ func main() {
 	// Extract a list of tables from page
 	tables := extractTables(string(fullPage))
 
-	rawData := readTable(tables[2])
+	rawData := readTable(tables[3])
 	data := generateList(rawData)
 
 	jsonData, err := json.Marshal(data)
